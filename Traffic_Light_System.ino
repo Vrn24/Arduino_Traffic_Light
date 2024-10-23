@@ -11,6 +11,7 @@ const int R_LED = 3; // Red LED
 const int Y_LED = 4; // Yellow LED
 const int G_LED = 5; // Green LED
 const int buttonPin = 6; // Pedestrian button pin
+const int soundpin = 13; // Sound when pedestrion button is active
 
 // Timing constants
 const unsigned long RED_TIME = 30000; // Red light duration
@@ -25,7 +26,7 @@ void setup() {
   pinMode(Y_LED, OUTPUT);
   pinMode(G_LED, OUTPUT);
   pinMode(buttonPin, INPUT_PULLUP); // Enable internal pull-up resistor
-  
+  pinMode(soundpin, OUTPUT):
   lcd.begin(16, 2); // Initialize the LCD with 16 columns and 2 rows
   lcd.print("Traffic Light"); // Display initial message
 }
@@ -74,8 +75,9 @@ void allowCrossing() {
   setLightState(LOW, LOW, LOW);
   lcd.clear();
   lcd.print("Walk Safely");
+  digitalWrite(soundpin, HIGH);
   delay(10000); // Allow crossing for 10 seconds
-
+  digitalWrite(soundpin, LOW);
   // Reset traffic light sequence
 }
 
